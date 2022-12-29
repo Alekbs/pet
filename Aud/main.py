@@ -11,6 +11,9 @@ from vosk import Model, KaldiRecognizer
 
 
 def listen():
+    """
+    Записывает речь и преобразует в текст
+    """
     while True:
         data = stream.read(4000, exception_on_overflow=False)
         if (rec.AcceptWaveform(data)) and (len(data) > 0):
@@ -20,18 +23,26 @@ def listen():
 
 
 def say(msg):
+    """
+    Синтез речи
+    """
     print(msg)
     engine.say(msg)
     engine.runAndWait()
 
 
 def time_now():
+    """
+    Время в данный момент
+    """
     time_check = datetime.now()
     say(f"Время: {time_check.hour} часа {time_check.minute} минут")
 
 
 def main():
-
+    """
+    Главная функция программы
+    """
     say("Я вас слушаю")
     for text in listen():
         print(text)
